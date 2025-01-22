@@ -1,4 +1,14 @@
-// package com.idol.spring_be.model;
+package com.idol.spring_be.model;
+
+import lombok.Data;
+
+@Data
+public class User {
+    private String username;
+    private String password;
+
+    // Getter, Setter
+}
 
 // public class User {
 //     private Long id;
