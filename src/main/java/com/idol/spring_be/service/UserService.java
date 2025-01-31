@@ -1,24 +1,34 @@
-// package com.idol.spring_be.service;
-// import com.idol.spring_be.model.User;
-// import com.idol.spring_be.repository.UserRepository;
+package com.idol.spring_be.service;
+import com.idol.spring_be.entity.User;
 
-// public class UserService {
+import org.springframework.stereotype.Service;
+
+import com.idol.spring_be.dto.UserInfo;
+import com.idol.spring_be.repository.UserRepository;
+
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
+public class UserService {
     
-//     private final UserRepository userRepository;
+    private final UserRepository userRepository;
 
-//     public UserService(UserRepository userRepository) {
-//         this.userRepository = userRepository;
-//     }
+    public User createUser(UserInfo userInfo) {
+        User user = User.builder()
+                        .username(userInfo.getUsername())
+                        .password(userInfo.getPassword())
+                        .email(userInfo.getEmail())
+                        .build();
 
-//     public User createUser(User user) {
-//         return userRepository.save(user);
-//     }
+        return userRepository.save(user);
+    }
 
-//     public User getUserById(Long id) {
-//         return userRepository.findById(id).orElse(null);
-//     }
+    public User getUserById(UserInfo userInfo) {
+        return userRepository.findByUsername(userInfo.getUsername());
+    }
 
-//     public void deleteUser(Long id) {
-//         userRepository.deleteById(id);
-//     }
-// }
+    public void deleteUser(UserInfo userInfo) {
+        userRepository.deleteByUsername(userInfo.getUsername());
+    }
+}

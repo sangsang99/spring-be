@@ -5,6 +5,27 @@ spring:
     encoding: UTF-8 
     mode: HTML5
     cache: false
+
+  datasource:
+    url: jdbc:mariadb://127.0.0.1:3306/spring_be_db
+    username: spring_be_user
+    password: spring_be_pwd
+    driver-class-name: org.mariadb.jdbc.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.MariaDBDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+  logging:
+    file:
+      name: logs/application.log
+    level:
+      root: INFO
+      org.springframework.web: DEBUG
+      org.apache.catalina: DEBUG
+
 server:
   port: 8080
   error:

@@ -2,13 +2,15 @@
 
 JAR_PATH="build/libs/spring-be-0.0.1-SNAPSHOT.jar"
 PID_FILE="logs/spring-be.pid"
+RUN_LOG="logs/runtime.log"
+APP_LOG="logs/application.log"
 
 case "$1" in
     run)
         echo "Building the project..."
-        ./gradlew clean bootJar > logs/runtime.log 2>&1 &
+        ./gradlew clean bootJar >> logs/runtime.log 2>&1 &
         echo "Running the application..."
-        nohup java -jar $JAR_PATH > logs/runtime.log 2>&1 &
+        nohup java -jar $JAR_PATH >> logs/runtime.log 2>&1 &
         echo $! > $PID_FILE
         echo "Application started with PID $(cat $PID_FILE)"
         ;;
@@ -29,7 +31,7 @@ case "$1" in
             PID=$(cat $PID_FILE)
             echo "Stopping the application with PID $PID..."
             kill $PID
-            rm $PID_FILE
+            rm $PID_FILE | rm $APP_LOG | rm $RUN_LOG
             echo "Application stopped"
         else
             echo "Application is not running"

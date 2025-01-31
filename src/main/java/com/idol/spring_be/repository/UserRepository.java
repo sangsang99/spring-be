@@ -1,8 +1,14 @@
-// package com.idol.spring_be.repository;
+package com.idol.spring_be.repository;
 
-// import org.springframework.data.jpa.repository.JpaRepository;
-// import com.idol.spring_be.model.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-// public interface UserRepository extends JpaRepository<User, Long> {
-//     // Custom query methods can be defined here if needed
-// }
+import com.idol.spring_be.entity.User;
+
+@Repository
+public interface UserRepository extends JpaRepository<User, Long> {
+    
+    public User findByUsername(String username);
+    public int deleteByUsername(String username);
+    
+}
